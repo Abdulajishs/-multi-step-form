@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <link href="./styles/output.css" rel="stylesheet" />
+
+    <title>Multi-step form</title>
+  </head>
+
+  <body>
+    <div
+      class="md:bg-[hsl(217,100%,97%)] md:h-[100vh] md:flex md:justify-center md:items-center"
+    >
+      <div
+        class="bg-[hsl(217,100%,97%)] flex flex-col md:flex-row md:justify-between md:bg-white md:rounded-lg"
+      >
+        <!-- Sidebar start -->
+        <aside class="relative md:m-5">
+          <img
+            src="./assets/images/bg-sidebar-mobile.svg"
+            alt="image sidebar"
+            class="w-full md:hidden"
+          />
+          <img
+            src="./assets/images/bg-sidebar-desktop.svg"
+            alt="image sidebar"
+            class="w-full hidden md:block"
+          />
+
+          <div
+            class="absolute top-0 w-full flex flex-row justify-center space-x-4 items-center mt-8 md:flex-col md:space-y-10 md:mx-0 px-5 md:bg-cover md:w-full"
+          >
+            <div class="md:flex md:flex-row md:space-x-5 md:w-full md:ml-4">
+              <p
+                class="border border-white h-9 w-9 rounded-full bg-[hsl(228,100%,84%)] text-black flex justify-center items-center"
+                id="step-1"
+              >
+                1
+              </p>
+              <div class="hidden md:flex md:flex-col md:w-1/2">
+                <p class="md:opacity-50 text-white text-sm">STEP 1</p>
+                <h3 class="md:font-bold text-white opacity-80">YOUR INFO</h3>
+              </div>
+            </div>
+
+            <div class="md:flex md:flex-row md:space-x-5 md:w-full">
+              <p
+                class="border border-white bg-transparent h-9 w-9 rounded-full text-white flex justify-center items-center"
+                id="step-2"
+              >
+                2
+              </p>
+              <div class="hidden md:flex md:flex-col md:w-1/2">
+                <p class="md:opacity-50 text-white text-sm">STEP 2</p>
+                <h3 class="md:font-bold text-white opacity-80">SELECT PLAN</h3>
+              </div>
+            </div>
+
+            <div class="md:flex md:flex-row md:space-x-5 md:w-full">
+              <p
+                class="border border-white bg-transparent h-9 w-9 rounded-full text-white flex justify-center items-center"
+              >
+                3
+              </p>
+              <div class="hidden md:flex md:flex-col md:w-1/2">
+                <p class="md:opacity-50 text-white text-sm">STEP 3</p>
+                <h3 class="md:font-bold text-white opacity-80">ADD-ONS</h3>
+              </div>
+            </div>
+
+            <div class="md:flex md:flex-row md:space-x-5 md:w-full">
+              <p
+                class="border border-white bg-transparent h-9 w-9 rounded-full text-white flex justify-center items-center"
+              >
+                4
+              </p>
+              <div class="hidden md:flex md:flex-col md:w-1/2">
+                <p class="md:opacity-50 text-white text-sm">STEP 4</p>
+                <h3 class="md:font-bold text-white opacity-80">SUMMARY</h3>
+              </div>
+            </div>
+          </div>
+        </aside>
+        <!-- Sidebar end -->
+
+        <!-- Step 1 start -->
+        <form
+          class=" relative -top-20 flex flex-col bg-[hsl(0,0%,100%)] mx-5 mb-48 p-7 rounded-lg md:top-0 md:mt-3 md:mb-0 lg:mx-16"
+          id="auth-form"
+        >
+          <h1 class="text-3xl font-extrabold text-blue-950 my-5">
+            Personal info
+          </h1>
+          <p class="text-gray-400 text-base font-medium mb-5">
+            Please provide your name,email address, and phone number.
+          </p>
+          <div class="flex flex-row justify-between">
+            <label for="name" class="text-blue-950">Name</label>
+            <span class="hidden text-red-500" id="name-error-span"
+              >This field is required</span
+            >
+          </div>
+          <input
+            type="text"
+            id="name"
+            placeholder="e.g. Stephen King"
+            required
+            class="border border-gray-300 rounded-md p-3 mb-4 placeholder:font-semibold placeholder:pl-2 focus:border-blue-700 focus:outline-none"
+          />
+          <div class="flex flex-row justify-between">
+            <label for="email" class="text-blue-950">Email Address</label>
+            <span class="hidden text-red-500" id="email-error-span"
+              >This field is required</span
+            >
+          </div>
+          <input
+            type="email"
+            id="email"
+            placeholder="e.g. stephenking@lorem.com"
+            required
+            class="border border-gray-300 rounded-md p-3 mb-4 placeholder:font-semibold placeholder:pl-2 focus:border-blue-700 focus:outline-none"
+          />
+          <div class="flex flex-row justify-between">
+            <label for="phone" class="text-blue-950">Phone Number</label>
+            <span class="hidden text-red-500" id="phone-error-span"
+              >This field is required</span
+            >
+          </div>
+          <input
+            type="number"
+            id="phone"
+            placeholder="e.g. +1 234 567 890"
+            required
+            class="border border-gray-300 rounded-md p-3 mb-4 placeholder:font-semibold placeholder:pl-2 md:mb-12 focus:border-blue-700 focus:outline-none"
+          />
+          <div
+            class="bg-white w-[100%] fixed bottom-0 right-0 flex justify-end md:static"
+          >
+            <button
+              class="bg-blue-950 text-white font-medium p-3 m-4 w-32 rounded-md md:m-0"
+              type="submit"
+            >
+              Next Step
+            </button>
+          </div>
+        </form>
+        <!-- Step 1 end -->
+
+        <!-- Step 2 start -->
+        <div class="hidden" id="step2Content">
+          <form
+            id="plan-form"
+            class="relative -top-20 flex flex-col bg-[hsl(0,0%,100%)] mx-5 p-7 rounded-lg md:top-0 md:mt-3 md:mb-0 lg:mx-16"
+          >
+            <h1 class="text-3xl font-extrabold text-blue-950 my-5">
+              Select your plan
+            </h1>
+            <p class="text-gray-400 text-base font-medium mb-5">
+              You have the option of monthly or yearly billing.
+            </p>
+            <!-- Monthly -->
+            <div class="flex flex-col space-y-3 md:flex-row md:space-x-3 md:w-full " id="monthlyPlan">
+              
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img src="./assets/images/icon-arcade.svg" alt="Arcade" class="h-10 w-10" />
+                <div class="flex flex-col ">
+                  <h6 class="text-blue-900 font-semibold">Arcade</h6>
+                  <p class="opacity-40">$9/mo</p>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img
+                  src="./assets/images/icon-advanced.svg"
+                  alt="Advanced icon"
+                  class="h-10 w-10"
+                />
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Advanced</h6>
+                  <p class="opacity-40">$12/mo</p>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img src="./assets/images/icon-pro.svg" alt="pro icon" class="h-10 w-10"/>
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Pro</h6>
+                  <p class="opacity-40">$15/mo</p>
+                </div>
+              </div>
+            </div>
+            <!-- Yearly -->
+            <div class="flex flex-col space-y-3 md:flex-row md:space-x-3 md:w-full " id="yearlyPlan">
+              
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img src="./assets/images/icon-arcade.svg" alt="Arcade" class="h-10 w-10" />
+                <div class="flex flex-col ">
+                  <h6 class="text-blue-900 font-semibold">Arcade</h6>
+                  <p class="opacity-40">$90/yr</p>
+                  <p class="text-blue-900 text-sm ">2 months free</p>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img
+                  src="./assets/images/icon-advanced.svg"
+                  alt="Advanced icon"
+                  class="h-10 w-10"
+                />
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Advanced</h6>
+                  <p class="opacity-40">$120/yr</p>
+                  <p class="text-blue-900 text-sm  ">2 months free</p>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+              >
+                <img src="./assets/images/icon-pro.svg" alt="pro icon" class="h-10 w-10"/>
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Pro</h6>
+                  <p class="opacity-40">$150/yr</p>
+                  <p class="text-blue-900 text-sm  ">2 months free</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- toggle -->
+            <div
+              class="flex flex-row justify-around items-center my-5 rounded-md bg-[hsl(217,100%,97%)] py-2 px-10 w-full md:mb-40"
+            >
+              <p>Monthly</p>
+              <button
+                id="toggleBtn"
+                class="h-5 w-10 bg-blue-950 rounded-full relative"
+              >
+                <div
+                  class="w-3 h-3 bg-white rounded-full absolute left-1 top-1 transition-transform duration-300"
+                  id="toggle-slide"
+                ></div>
+              </button>
+              <p>Yearly</p>
+            </div>
+
+            <!-- navigators -->
+            <div
+              class="bg-white w-[100%] fixed bottom-0 right-0 flex justify-between md:static"
+            >
+              <button
+                class="bg-transparent text-gray-400 font-medium p-3 m-4 w-32 rounded-sm md:m-0 md:p-0 md:w-auto"
+                id="backToInfo"
+              >
+                Go Back
+              </button>
+              <button
+                class="bg-blue-950 text-white font-medium p-3 m-4 w-32 rounded-md md:m-0"
+                type="submit"
+              >
+                Next Step
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2 end -->
+      </div>
+    </div>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
