@@ -1,4 +1,4 @@
-let inputs = document.querySelectorAll('input');
+let inputs = document.querySelectorAll('#auth-form input');
 
 function validateInput(input) {
 
@@ -67,7 +67,7 @@ step1Content.addEventListener('submit', (event) => {
 
         step1Content.classList.add('hidden')
         step2Content.classList.remove('hidden')
-        console.log('Form submitted successfully')
+        console.log('Auth Form submitted successfully')
     }
 })
 
@@ -103,4 +103,92 @@ toggle.addEventListener('click', (event) => {
 })
 
 
+let plans = document.querySelectorAll(".plan");
 
+let selectedPlan = null;
+
+plans.forEach((plan) => {
+    plan.addEventListener('click', (event) => {
+        let activeSection = plan.parentElement.id;
+
+        document.querySelectorAll(`#${activeSection} .plan`).forEach((resetPlan) => {
+            resetPlan.classList.remove('border-blue-700', 'bg-blue-100');
+            resetPlan.classList.add('border-gray-300')
+        })
+
+        plan.classList.remove('border-gray-300');
+        plan.classList.add('border-blue-700', 'bg-blue-100');
+
+        selectedPlan = event.target.closest('.plan');
+        console.log(selectedPlan.dataset);
+        console.log(selectedPlan.querySelector('p').textContent)
+    })
+})
+// Selected plans to Add-ons
+
+let step3 = document.getElementById('step-3')
+
+let step3Content = document.getElementById("step3Content");
+
+step2Content.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    // console.log(selectedPlan.querySelector('p').textContent)
+
+    if(selectedPlan){
+        step2.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+        step2.classList.add('bg-transparent', 'text-white')
+
+        step3.classList.remove('bg-transparent', 'text-white')
+        step3.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+
+        step2Content.classList.add('hidden');
+        step3Content.classList.remove('hidden')
+        console.log('plan selected successfully.');
+        
+    }else{
+        alert('Select any one plan')
+    }
+})
+
+
+let addOnPlans = document.querySelectorAll('.addon-plan');
+let selectedAddons = null;
+
+addOnPlans.forEach((plan) => {
+    plan.addEventListener('click', (event) => {
+
+        let checkbox = plan.querySelector('input[type="checkbox"]');
+        let isChecked = checkbox.checked;
+
+        // Toggle the checkbox state
+        checkbox.checked = !isChecked;
+
+        if (checkbox.checked) {
+            plan.classList.remove('border-gray-300');
+            plan.classList.add('border-blue-700', 'bg-blue-100');
+        } else {
+            plan.classList.remove('border-blue-700', 'bg-blue-100');
+        }
+
+        selectedPlan = event.target.closest('.addon-plan');
+
+        // console.log(selectedPlan.querySelector('.price').textContent)
+    });
+});
+
+
+// backt to select plan
+
+let backToSelectPlan = document.getElementById("backToSelectPlan");
+
+backToSelectPlan.addEventListener('click',(event)=>{
+    event.preventDefault();
+    step2Content.classList.remove('hidden');
+    step3Content.classList.add('hidden');
+
+    step2.classList.remove('bg-transparent', 'text-white')
+    step2.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+
+    step3.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+    step3.classList.add('bg-transparent', 'text-white')
+})

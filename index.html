@@ -76,7 +76,7 @@
             <div class="md:flex md:flex-row md:space-x-5 md:w-full">
               <p
                 class="border border-white bg-transparent h-9 w-9 rounded-full text-white flex justify-center items-center"
-              >
+                id="step-3">
                 3
               </p>
               <div class="hidden md:flex md:flex-col md:w-1/2">
@@ -179,7 +179,8 @@
             <div class="flex flex-col space-y-3 md:flex-row md:space-x-3 md:w-full " id="monthlyPlan">
               
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="arcade" data-period="monthly"
               >
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade" class="h-10 w-10" />
                 <div class="flex flex-col ">
@@ -189,7 +190,8 @@
               </div>
 
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="advanced" data-period="monthly"
               >
                 <img
                   src="./assets/images/icon-advanced.svg"
@@ -203,7 +205,8 @@
               </div>
 
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="pro" data-period="monthly"
               >
                 <img src="./assets/images/icon-pro.svg" alt="pro icon" class="h-10 w-10"/>
                 <div class="flex flex-col">
@@ -216,7 +219,8 @@
             <div class="flex flex-col space-y-3 md:flex-row md:space-x-3 md:w-full " id="yearlyPlan">
               
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:mt-3 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="arcade" data-period="yearly"
               >
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade" class="h-10 w-10" />
                 <div class="flex flex-col ">
@@ -227,7 +231,8 @@
               </div>
 
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="advanced" data-period="yearly"
               >
                 <img
                   src="./assets/images/icon-advanced.svg"
@@ -242,7 +247,8 @@
               </div>
 
               <div
-                class="flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                class="plan flex flex-row border border-gray-300 rounded-lg p-5 space-x-4 md:flex-col md:p-2 md:w-1/3 md:space-x-0 md:space-y-8"
+                data-plan="pro" data-period="yearly"
               >
                 <img src="./assets/images/icon-pro.svg" alt="pro icon" class="h-10 w-10"/>
                 <div class="flex flex-col">
@@ -275,7 +281,7 @@
               class="bg-white w-[100%] fixed bottom-0 right-0 flex justify-between md:static"
             >
               <button
-                class="bg-transparent text-gray-400 font-medium p-3 m-4 w-32 rounded-sm md:m-0 md:p-0 md:w-auto"
+                class="bg-transparent text-gray-400 font-medium p-3 m-4 w-32 rounded-sm hover:text-blue-900 md:m-0 md:p-0 md:w-auto"
                 id="backToInfo"
               >
                 Go Back
@@ -291,6 +297,87 @@
         </div>
 
         <!-- Step 2 end -->
+
+        <!-- Step 3 start -->
+
+        <div class="hidden" id="step3Content">
+          <form
+            id="addons-form"
+            class="relative -top-20 flex flex-col bg-[hsl(0,0%,100%)] mx-5 p-7 rounded-lg md:top-0  md:mt-3 md:mb-0 lg:mx-16"
+          >
+            <h1 class="text-3xl font-extrabold text-blue-950 my-5">
+              Pick add-ons
+            </h1>
+            <p class="text-gray-400 text-base font-medium mb-5">
+              Add-ons help enhance your gaming experience.
+            </p>
+
+            <div class="flex flex-col space-y-3  md:w-full" id="add-ons-plans">
+
+              <label
+                class="addon-plan flex flex-row justify-between items-center border border-gray-300 rounded-lg p-5 space-x-4 cursor-pointer md:py-3 "
+              >
+              <div class="flex flex-row justify-center items-center space-x-7">
+                <input type="checkbox" class="h-5 w-5 " data-addon="online-service" />
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Online service</h6>
+                  <p class="opacity-40">Access to multiplayer games</p>
+                </div>
+              </div>
+                <p class="price text-blue-800 ">+$1/mo</p>
+              </label>
+
+              <label
+                class="addon-plan flex flex-row justify-between items-center border border-gray-300 rounded-lg p-5 space-x-4 cursor-pointer md:py-3 "
+              >
+              <div class="flex flex-row justify-center items-center space-x-7">
+                <input type="checkbox" class="h-5 w-5 " data-addon="online-service" />
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Larger storage</h6>
+                  <p class="opacity-40">Extra 1TB of cloud save</p>
+                </div>
+              </div>
+                <p class="text-blue-800 ">+$2/mo</p>
+              </label>
+
+              <label
+                class="addon-plan flex flex-row justify-between items-center border border-gray-300 rounded-lg p-5 space-x-4 cursor-pointer md:py-3 "
+              >
+              <div class="flex flex-row justify-center items-center space-x-7">
+                <input type="checkbox" class="h-5 w-5 " data-addon="online-service" />
+                <div class="flex flex-col">
+                  <h6 class="text-blue-900 font-semibold">Customizable Profile</h6>
+                  <p class="opacity-40">Custom theme on your profile</p>
+                </div>
+              </div>
+                <p class="text-blue-800 ">+$2/mo</p>
+              </label>
+
+            </div>
+            
+
+            <div
+              class="bg-white w-[100%] fixed bottom-0 right-0 flex flex-row justify-between md:static md:mt-24"
+            >
+              <button
+                class="bg-transparent text-gray-400 font-medium p-3 m-4 w-32 rounded-sm hover:text-blue-900 md:m-0 md:p-0 md:w-auto"
+                id="backToSelectPlan"
+              >
+                Go Back
+              </button>
+              <button
+                class="bg-blue-950 text-white font-medium p-3 m-4 w-32 rounded-md md:m-0"
+                type="submit"
+              >
+                Next Step
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 3 end -->
+
+
       </div>
     </div>
     <script src="./script.js" defer></script>
