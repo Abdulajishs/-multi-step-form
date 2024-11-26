@@ -111,7 +111,7 @@ toggle.addEventListener('click', (event) => {
     toggleSlide.classList.toggle('translate-x-5');
 
     resetSummary()
-    resetAddon()
+    resetData()
     
 })
 
@@ -300,21 +300,21 @@ function resetSummary() {
     addOnName.innerHTML = '';
     addOnPrice.innerHTML = '';
     totalAmount.textContent = 0;
-
-    // Reset visual
-    // document.querySelectorAll(`#monthlyPlan .plan, #yearlyPlan .plan`).forEach(plan => {
-    //     plan.classList.remove('border-blue-700', 'bg-blue-100');
-    //     plan.classList.add('border-gray-300');
-    // });
 }
 
-function resetAddon() {
+function resetData() {
     selectedAddonsData = [];
+    selectedPlan = null;
 
     document.querySelectorAll('.addon-plan').forEach(addon => {
         addon.classList.remove('border-blue-700', 'bg-blue-100');
         addon.classList.add('border-gray-300');
         addon.querySelector('input[type="checkbox"]').checked = false;
+    });
+
+    document.querySelectorAll(`#monthlyPlan .plan, #yearlyPlan .plan`).forEach(plan => {
+        plan.classList.remove('border-blue-700', 'bg-blue-100');
+        plan.classList.add('border-gray-300');
     });
 }
 
@@ -362,10 +362,13 @@ backToAddons.addEventListener('click', (event) => {
 
 
 // step4 to step5
+let mainContainer = document.getElementById('main');
 let step5Content = document.getElementById("step5Content")
 step5Content.classList.add('hidden')
 step4Content.addEventListener("submit",(event)=>{
     event.preventDefault();
+
+    mainContainer.classList.add('md:w-[80%]', 'lg:w-[60%]')
 
     step4Content.classList.add('hidden');
     step5Content.classList.remove('hidden');
