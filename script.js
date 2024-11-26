@@ -22,7 +22,7 @@ function validateInput(input) {
 
         return false
     }
-    else if (input.type === 'number' && input.value.trim().length < 10) {
+    else if (input.type === 'number' && !(/^\d{10}$/).test(input.value.trim())) {
         errorSpan.classList.remove('hidden')
         input.classList.remove('border-gray-300');
         input.classList.add('border-red-700');
@@ -39,6 +39,7 @@ for (let input of inputs) {
     })
 }
 
+// step-1 to step-2
 let step1Content = document.querySelector('#auth-form');
 let step1 = document.getElementById('step-1')
 let step2 = document.getElementById('step-2')
@@ -71,7 +72,7 @@ step1Content.addEventListener('submit', (event) => {
     }
 })
 
-
+//  step-2 to step-1
 let backToInfo = document.getElementById('backToInfo');
 
 backToInfo.addEventListener('click', (event) => {
@@ -86,12 +87,17 @@ backToInfo.addEventListener('click', (event) => {
     step2.classList.add('bg-transparent', 'text-white')
 })
 
+// Toggling form monthly to yearly and vice-versa
 let monthlyPlan = document.getElementById('monthlyPlan');
 let yearlyPlan = document.getElementById('yearlyPlan');
+let monthlyAddon = document.getElementById('add-ons-plans-monthly');
+let yearlyAddon = document.getElementById('add-ons-plans-yearly');
+
 let toggleSlide = document.getElementById('toggle-slide');
 let toggle = document.getElementById('toggleBtn');
 
 yearlyPlan.classList.add("hidden")
+yearlyAddon.classList.add("hidden")
 
 toggle.addEventListener('click', (event) => {
     event.preventDefault();
@@ -99,13 +105,23 @@ toggle.addEventListener('click', (event) => {
     monthlyPlan.classList.toggle('hidden')
     yearlyPlan.classList.toggle('hidden')
 
+    monthlyAddon.classList.toggle('hidden')
+    yearlyAddon.classList.toggle('hidden')
+
     toggleSlide.classList.toggle('translate-x-5');
+
+    resetSummary()
+    resetAddon()
+    
 })
 
 
+
+// Selecting plans
 let plans = document.querySelectorAll(".plan");
 
 let selectedPlan = null;
+let summarySlectedPlan = document.getElementById('slectedPlans');
 
 plans.forEach((plan) => {
     plan.addEventListener('click', (event) => {
@@ -121,20 +137,25 @@ plans.forEach((plan) => {
 
         selectedPlan = event.target.closest('.plan');
         console.log(selectedPlan.dataset);
-        console.log(selectedPlan.querySelector('p').textContent)
+        console.log(selectedPlan.querySelector('p').textContent);
+
+        selectedPlan = selectedPlan.dataset
     })
 })
-// Selected plans to Add-ons
+
+
+// step2 to step3
 
 let step3 = document.getElementById('step-3')
 
 let step3Content = document.getElementById("step3Content");
+let addOnForm = document.getElementById("addons-form");
 
-step2Content.addEventListener('submit',(event)=>{
+
+step2Content.addEventListener('submit', (event) => {
     event.preventDefault();
-    // console.log(selectedPlan.querySelector('p').textContent)
 
-    if(selectedPlan){
+    if (selectedPlan) {
         step2.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
         step2.classList.add('bg-transparent', 'text-white')
 
@@ -144,15 +165,18 @@ step2Content.addEventListener('submit',(event)=>{
         step2Content.classList.add('hidden');
         step3Content.classList.remove('hidden')
         console.log('plan selected successfully.');
-        
-    }else{
+
+    } else {
         alert('Select any one plan')
     }
+
 })
 
+// Selecting  Add-ons
 
 let addOnPlans = document.querySelectorAll('.addon-plan');
 let selectedAddons = null;
+let selectedAddonsData = []
 
 addOnPlans.forEach((plan) => {
     plan.addEventListener('click', (event) => {
@@ -170,18 +194,24 @@ addOnPlans.forEach((plan) => {
             plan.classList.remove('border-blue-700', 'bg-blue-100');
         }
 
-        selectedPlan = event.target.closest('.addon-plan');
+        selectedAddons = event.target.closest('.addon-plan');
 
-        // console.log(selectedPlan.querySelector('.price').textContent)
+        console.log(selectedAddons.dataset)
+        if (checkbox.checked && !selectedAddonsData.includes(selectedAddons.dataset)) {
+            selectedAddonsData.push(selectedAddons.dataset)
+            console.log(selectedAddonsData)
+        } else if (!checkbox.checked && selectedAddonsData.includes(selectedAddons.dataset)) {
+            let index = selectedAddonsData.indexOf(selectedAddons.dataset);
+            selectedAddonsData.splice(index, 1)
+        }
     });
 });
 
 
-// backt to select plan
-
+// back to select plan
 let backToSelectPlan = document.getElementById("backToSelectPlan");
 
-backToSelectPlan.addEventListener('click',(event)=>{
+backToSelectPlan.addEventListener('click', (event) => {
     event.preventDefault();
     step2Content.classList.remove('hidden');
     step3Content.classList.add('hidden');
@@ -191,4 +221,152 @@ backToSelectPlan.addEventListener('click',(event)=>{
 
     step3.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
     step3.classList.add('bg-transparent', 'text-white')
+})
+
+
+// step 3 to step4
+let step4 = document.getElementById('step-4')
+
+let step4Content = document.getElementById("step4Content");
+
+let planSummaryName = document.getElementById("planSummaryName");
+let planSummaryPrice = document.getElementById("planSummaryPrice");
+
+let addOnName = document.getElementById("add-ons-name");
+let addOnPrice = document.getElementById("add-ons-price");
+
+let total = 0;
+let totalPrice = document.getElementById("totalAmount");
+let totalPeriod = document.getElementById("totalPeriod");
+
+step3Content.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (selectedAddons) {
+        step3.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+        step3.classList.add('bg-transparent', 'text-white')
+
+        step4.classList.remove('bg-transparent', 'text-white')
+        step4.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+
+        step3Content.classList.add('hidden');
+        step4Content.classList.remove('hidden')
+
+        console.log('Add-ons selected successfully.');
+
+    } else {
+        alert('Select any one plan')
+    }
+    console.log(selectedPlan);
+
+    totalPeriod.textContent = ""
+
+    // ADD SUMMARY Details
+    planSummaryName.innerHTML = `<p class="text-blue-900 font-medium">${selectedPlan.plan}(${selectedPlan.period})</p>`
+    if (selectedPlan.period === 'Monthly') {
+        planSummaryPrice.innerHTML = `<p class="text-blue-900 font-medium">$${selectedPlan.price}/mo</p>`
+        total += Number(selectedPlan.price)
+        totalPeriod.textContent += "Total(per month)"
+    } else {
+        planSummaryPrice.innerHTML = `<p class="text-blue-900 font-medium">$${selectedPlan.price}/yr</p>`
+        total += Number(selectedPlan.price)
+        totalPeriod.textContent += "Total(per year)"
+    }
+
+    selectedAddonsData.forEach((data) => {
+        if(data.addonsperiod === "Monthly"){
+            addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
+            addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/mo</p>`
+            total += Number(data.addonsprice)
+        }else{
+            addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
+            addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/yr</p>`
+            total += Number(data.addonsprice)
+        }
+    })
+
+    totalAmount.textContent = `+$${total}/mo`
+})
+
+// Resetting Summary
+
+function resetSummary() {
+    // Resetting data
+    // selectedPlan = null;
+    total = 0;
+    // Clear the summary section
+    planSummaryName.textContent = '';
+    planSummaryPrice.textContent = '';
+    addOnName.innerHTML = '';
+    addOnPrice.innerHTML = '';
+    totalAmount.textContent = 0;
+
+    // Reset visual
+    // document.querySelectorAll(`#monthlyPlan .plan, #yearlyPlan .plan`).forEach(plan => {
+    //     plan.classList.remove('border-blue-700', 'bg-blue-100');
+    //     plan.classList.add('border-gray-300');
+    // });
+}
+
+function resetAddon() {
+    selectedAddonsData = [];
+
+    document.querySelectorAll('.addon-plan').forEach(addon => {
+        addon.classList.remove('border-blue-700', 'bg-blue-100');
+        addon.classList.add('border-gray-300');
+        addon.querySelector('input[type="checkbox"]').checked = false;
+    });
+}
+
+// Change Plan
+
+let changePlan = document.getElementById("changePlan");
+
+changePlan.addEventListener("click", () => {
+    step4.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+    step4.classList.add('bg-transparent', 'text-white')
+
+    step2.classList.remove('bg-transparent', 'text-white')
+    step2.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+
+    step4Content.classList.add('hidden');
+    step2Content.classList.remove('hidden');
+
+    resetSummary();
+
+    console.log('Try to change plans.');
+})
+
+// back to Addon plans step
+let backToAddons = document.getElementById("backToAddons");
+
+backToAddons.addEventListener('click', (event) => {
+    event.preventDefault();
+    step3Content.classList.remove('hidden');
+    step4Content.classList.add('hidden');
+
+    step3.classList.remove('bg-transparent', 'text-white')
+    step3.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+
+    step4.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+    step4.classList.add('bg-transparent', 'text-white')
+
+    // Clear the summary section
+    total = 0;
+    planSummaryName.textContent = '';
+    planSummaryPrice.textContent = '';
+    addOnName.innerHTML = '';
+    addOnPrice.innerHTML = '';
+    totalAmount.textContent = 0;
+})
+
+
+// step4 to step5
+let step5Content = document.getElementById("step5Content")
+step5Content.classList.add('hidden')
+step4Content.addEventListener("submit",(event)=>{
+    event.preventDefault();
+
+    step4Content.classList.add('hidden');
+    step5Content.classList.remove('hidden');
 })
