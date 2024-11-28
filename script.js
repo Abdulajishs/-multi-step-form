@@ -112,7 +112,7 @@ toggle.addEventListener('click', (event) => {
 
     resetSummary()
     resetData()
-    
+
 })
 
 
@@ -239,21 +239,17 @@ let totalPeriod = document.getElementById("totalPeriod");
 step3Content.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    if (selectedAddons) {
-        step3.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
-        step3.classList.add('bg-transparent', 'text-white')
+    step3.classList.remove('bg-[hsl(228,100%,84%)]', 'text-black')
+    step3.classList.add('bg-transparent', 'text-white')
 
-        step4.classList.remove('bg-transparent', 'text-white')
-        step4.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
+    step4.classList.remove('bg-transparent', 'text-white')
+    step4.classList.add('bg-[hsl(228,100%,84%)]', 'text-black')
 
-        step3Content.classList.add('hidden');
-        step4Content.classList.remove('hidden')
+    step3Content.classList.add('hidden');
+    step4Content.classList.remove('hidden')
 
-        console.log('Add-ons selected successfully.');
+    console.log('Add-ons selected successfully.');
 
-    } else {
-        alert('Select any one plan')
-    }
     console.log(selectedPlan);
 
     totalPeriod.textContent = ""
@@ -271,11 +267,11 @@ step3Content.addEventListener('submit', (event) => {
     }
 
     selectedAddonsData.forEach((data) => {
-        if(data.addonsperiod === "Monthly"){
+        if (data.addonsperiod === "Monthly") {
             addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
             addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/mo</p>`
             total += Number(data.addonsprice)
-        }else{
+        } else {
             addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
             addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/yr</p>`
             total += Number(data.addonsprice)
@@ -362,7 +358,7 @@ backToAddons.addEventListener('click', (event) => {
 let mainContainer = document.getElementById('main');
 let step5Content = document.getElementById("step5Content")
 step5Content.classList.add('hidden')
-step4Content.addEventListener("submit",(event)=>{
+step4Content.addEventListener("submit", (event) => {
     event.preventDefault();
 
     mainContainer.classList.add('md:w-[80%]', 'lg:w-[60%]')
