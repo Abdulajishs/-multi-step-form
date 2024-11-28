@@ -22,7 +22,7 @@ function validateInput(input) {
 
         return false
     }
-    else if (input.type === 'number' && !(/^\d{10}$/).test(input.value.trim())) {
+    else if (input.type === 'tel' && !(/^\d{10}$/).test(input.value.trim())) {
         errorSpan.classList.remove('hidden')
         input.classList.remove('border-gray-300');
         input.classList.add('border-red-700');
@@ -183,9 +183,6 @@ addOnPlans.forEach((plan) => {
 
         let checkbox = plan.querySelector('input[type="checkbox"]');
         let isChecked = checkbox.checked;
-
-        // Toggle the checkbox state
-        checkbox.checked = !isChecked;
 
         if (checkbox.checked) {
             plan.classList.remove('border-gray-300');
