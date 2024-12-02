@@ -182,7 +182,7 @@ addOnPlans.forEach((plan) => {
     plan.addEventListener('click', (event) => {
 
         let checkbox = plan.querySelector('input[type="checkbox"]');
-        let isChecked = checkbox.checked;
+        // let isChecked = checkbox.checked;
 
         if (checkbox.checked) {
             plan.classList.remove('border-gray-300');
@@ -265,20 +265,21 @@ step3Content.addEventListener('submit', (event) => {
         total += Number(selectedPlan.price)
         totalPeriod.textContent += "Total(per year)"
     }
-
+    
     selectedAddonsData.forEach((data) => {
         if (data.addonsperiod === "Monthly") {
             addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
             addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/mo</p>`
             total += Number(data.addonsprice)
+            totalAmount.textContent = `+$${total}/mo`
         } else {
             addOnName.innerHTML += `<p class="text-gray-400 font-normal mb-5">${data.addonsname}</p>`
             addOnPrice.innerHTML += `<p class="text-blue-800 font-normal mb-5">+$${data.addonsprice}/yr</p>`
             total += Number(data.addonsprice)
+            totalAmount.textContent = `+$${total}/yr`
         }
     })
 
-    totalAmount.textContent = `+$${total}/mo`
 })
 
 // Resetting Summary
@@ -361,7 +362,7 @@ step5Content.classList.add('hidden')
 step4Content.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    mainContainer.classList.add('md:w-[80%]', 'lg:w-[60%]')
+    mainContainer.classList.add('md:w-[80%]', 'lg:w-[60%]', 'h-[100vh]','md:h-auto')
 
     step4Content.classList.add('hidden');
     step5Content.classList.remove('hidden');
