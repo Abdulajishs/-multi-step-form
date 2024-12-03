@@ -260,10 +260,12 @@ step3Content.addEventListener('submit', (event) => {
         planSummaryPrice.innerHTML = `<p class="text-blue-900 font-medium">$${selectedPlan.price}/mo</p>`
         total += Number(selectedPlan.price)
         totalPeriod.textContent += "Total(per month)"
+        totalAmount.textContent = `+$${total}/mo`
     } else {
         planSummaryPrice.innerHTML = `<p class="text-blue-900 font-medium">$${selectedPlan.price}/yr</p>`
         total += Number(selectedPlan.price)
         totalPeriod.textContent += "Total(per year)"
+        totalAmount.textContent = `+$${total}/yr`
     }
     
     selectedAddonsData.forEach((data) => {
